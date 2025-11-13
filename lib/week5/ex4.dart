@@ -79,18 +79,20 @@ class MyApp extends StatelessWidget {
           height: double.infinity,
           color: Colors.grey,
           padding: EdgeInsets.all(15),
-          child: Column(
-            children: [
-              SizedBox(height: 15),
-              WeatherCard(cities: Cities.phnompenh),
-              SizedBox(height: 15),
-              WeatherCard(cities: Cities.paris),
-              SizedBox(height: 15),
-              WeatherCard(cities: Cities.rome),
-              SizedBox(height: 15),
-              WeatherCard(cities: Cities.siemreap),
-              SizedBox(height: 15),
-            ],
+          child: Center(
+            child: Column(
+              children: [
+                SizedBox(height: 15),
+                WeatherCard(cities: Cities.phnompenh),
+                SizedBox(height: 15),
+                WeatherCard(cities: Cities.paris),
+                SizedBox(height: 15),
+                WeatherCard(cities: Cities.rome),
+                SizedBox(height: 15),
+                WeatherCard(cities: Cities.siemreap),
+                SizedBox(height: 15),
+              ],
+            ),
           ),
         ),
       ),
