@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
           color: Colors.grey,
           padding: EdgeInsets.all(15),
           child: Center(
-            child: Column(
+            child: ListView(
               children: [
                 SizedBox(height: 15),
                 WeatherCard(cities: Cities.phnompenh),
@@ -88,6 +88,10 @@ class MyApp extends StatelessWidget {
                 WeatherCard(cities: Cities.paris),
                 SizedBox(height: 15),
                 WeatherCard(cities: Cities.rome),
+                SizedBox(height: 15),
+                WeatherCard(cities: Cities.siemreap),
+                SizedBox(height: 15),
+                WeatherCard(cities: Cities.siemreap),
                 SizedBox(height: 15),
                 WeatherCard(cities: Cities.siemreap),
                 SizedBox(height: 15),
@@ -108,9 +112,9 @@ class WeatherCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return PhysicalModel(
       color: Colors.transparent,
-      elevation: 0.8,
+      elevation: 2,
       borderRadius: BorderRadius.circular(5),
-      shadowColor: Colors.black45,
+      shadowColor: Colors.pink,
 
       child: Stack(
         children: [
@@ -165,19 +169,6 @@ class WeatherCard extends StatelessWidget {
           ),
 
           Positioned(
-            top: 20,
-            right: 30,
-            child: Text(
-              cities.currTemp,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-
-          Positioned(
             top: -10,
             right: -40,
             child: Container(
@@ -193,6 +184,19 @@ class WeatherCard extends StatelessWidget {
                   end: Alignment.bottomRight,
                 ),
                 borderRadius: BorderRadius.circular(80),
+              ),
+            ),
+          ),
+
+          Positioned(
+            top: 20,
+            right: 30,
+            child: Text(
+              cities.currTemp,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
