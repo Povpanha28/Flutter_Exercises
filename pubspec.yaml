@@ -65,6 +65,8 @@ flutter:
     - assets/ex4/sunny.png
     - assets/ex4/sunnyCloudy.png
     - assets/ex4/veryCloudy.png
+    - assets/ex5/
+    - assets/w4-s2/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
