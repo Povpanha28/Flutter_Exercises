@@ -36,7 +36,7 @@ class _CustomButtonState extends State<CustomButton> {
   bool selected = false;
 
   String get text => selected ? "Selected" : "Not Selected";
-  Color get bgColor => selected ? Colors.blue : Colors.grey[300]!;
+  Color get bgColor => selected ? Colors.blue : Colors.blue[300]!;
   Color get textColor => selected ? Colors.white : Colors.black;
 
   void changeBtnState() {
