@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
-class TemperatureScreen extends StatelessWidget {
+class TemperatureScreen extends StatefulWidget {
   TemperatureScreen({super.key});
 
+  @override
+  State<TemperatureScreen> createState() => _TemperatureScreenState();
+}
+
+class _TemperatureScreenState extends State<TemperatureScreen> {
   final InputDecoration inputDecoration = InputDecoration(
     enabledBorder: OutlineInputBorder(
       borderSide: const BorderSide(color: Colors.white, width: 1.0),
@@ -11,6 +16,33 @@ class TemperatureScreen extends StatelessWidget {
     hintText: 'Enter a temperature',
     hintStyle: const TextStyle(color: Colors.white),
   );
+
+  final TextEditingController myController = TextEditingController();
+  double? inputValue;
+
+  String get displayValue => inputValue == null
+      ? "Empty or invalid value"
+      : (inputValue! * 9 / 5 + 32).toString();
+
+  @override
+  void initState() {
+    super.initState();
+    // Listen for changes in the text field
+    myController.addListener(_updateEnteredText);
+  }
+
+  void _updateEnteredText() {
+    setState(() {
+      inputValue = double.tryParse(myController.text);
+    });
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +70,7 @@ class TemperatureScreen extends StatelessWidget {
             TextField(
               decoration: inputDecoration,
               style: const TextStyle(color: Colors.white),
+              controller: myController,
             ),
             const SizedBox(height: 30),
             const Text("Temperature in Fahrenheit:"),
@@ -48,7 +81,7 @@ class TemperatureScreen extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Text('test'),
+              child: Text('$displayValue '),
             ),
           ],
         ),

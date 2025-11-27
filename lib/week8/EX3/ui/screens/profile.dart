@@ -1,9 +1,11 @@
+import 'package:app/week8/EX3/model/profile_tile_model.dart';
 import 'package:flutter/material.dart';
 
 import '../theme/theme.dart';
 
 class ProfileApp extends StatelessWidget {
-  const ProfileApp({super.key});
+  final ProfileData data;
+  const ProfileApp({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,7 @@ class ProfileApp extends StatelessWidget {
       backgroundColor: AppColors.primary.withAlpha(100),
       appBar: AppBar(
         backgroundColor: AppColors.primary,
-        title: const Text(
+        title: Text(
           'CADT student Profile',
           style: TextStyle(color: Colors.white),
         ),
@@ -24,35 +26,34 @@ class ProfileApp extends StatelessWidget {
             const SizedBox(height: 40),
             const CircleAvatar(
               radius: 60,
-              backgroundImage: AssetImage(
-                  'assets/images/w8/aang.png'), 
+              backgroundImage: AssetImage('assets/images/w8/aang.png'),
             ),
             const SizedBox(height: 20),
             Text(
-              'Ronan OGOR',
+              data.name,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: AppColors.primary,
               ),
             ),
-            const Text(
-              'Flutter Developer',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-              ),
+            Text(
+              data.position,
+              style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             const SizedBox(height: 20),
-            const ProfileTile(
-              icon: Icons.phone,
-              title: "Phone Number",
-              data: "+123 456 7890",
-            ),
-             const ProfileTile(
-              icon: Icons.location_on,
-              title: "Address",
-              data: "Cambodia",
+            Expanded(
+              child: ListView(
+                children: [
+                  ...data.tiles.map(
+                    (title) => ProfileTile(
+                      icon: title.icon,
+                      title: title.title,
+                      data: title.value,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
