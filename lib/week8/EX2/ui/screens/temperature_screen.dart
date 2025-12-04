@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TemperatureScreen extends StatefulWidget {
-  TemperatureScreen({super.key});
+  const TemperatureScreen({super.key});
 
   @override
   State<TemperatureScreen> createState() => _TemperatureScreenState();

@@ -1,4 +1,5 @@
 import 'package:app/week9/practice/model/expense.dart';
+import 'package:app/week9/practice/ui/widgets/ExpenseForm.dart';
 import 'package:app/week9/practice/ui/widgets/expenseItem.dart';
 import 'package:flutter/material.dart';
 
@@ -210,19 +211,34 @@ class _ExpensesState extends State<Expenses> {
     ),
   ];
 
+  void onShowModal() {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return ExpenseForm();
+      },
+    );
+  }
+
+  // void onCloseModal() {
+  //   Navigator.pop(context);
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue[500],
         title: Text("Expense App"),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add))],
+        actions: [IconButton(onPressed: onShowModal, icon: Icon(Icons.add))],
       ),
       body: Container(
         padding: const EdgeInsets.all(10),
         color: Colors.blue[200],
         child: ListView.builder(
           itemCount: registeredExpenses.length,
-          itemBuilder: (context, index) => _buildItem(context, index, registeredExpenses),
+          itemBuilder: (context, index) =>
+              _buildItem(context, index, registeredExpenses),
         ),
         // child: Column(children: [ExpenseCard(expense: expense)]),
       ),
@@ -231,7 +247,7 @@ class _ExpensesState extends State<Expenses> {
 }
 
 Widget _buildItem(BuildContext context, int index, List<Expense> expenses) {
-  print("Build item $index");
+  // print("Build item $index");
 
   return ExpenseCard(expense: expenses[index]);
 }

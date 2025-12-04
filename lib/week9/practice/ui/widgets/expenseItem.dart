@@ -18,7 +18,13 @@ class ExpenseCard extends StatelessWidget {
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [Text(expense.title), Text("\$${expense.amount}")],
+            children: [
+              Text(
+                expense.title,
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+              ),
+              Text("\$${expense.amount}"),
+            ],
           ),
           Spacer(),
           Icon(expense.category.icon),
