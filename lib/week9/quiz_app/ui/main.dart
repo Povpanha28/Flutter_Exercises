@@ -52,6 +52,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: switch (currScreenIndex) {
         0 => StartScreen(onChangeScreen: showQuestion),
         1 => QuestionScreen(
@@ -62,7 +63,6 @@ class _MyAppState extends State<MyApp> {
         2 => ResultScreen(quiz: quiz, onChangeScreen: showStart),
         _ => const Placeholder(), // Default case using a wildcard pattern '_'
       },
-      // home: ResultScreen(quiz: quiz),
     );
   }
 }

@@ -16,213 +16,239 @@ class Expenses extends StatefulWidget {
 
 class _ExpensesState extends State<Expenses> {
   List<Expense> registeredExpenses = [
-    Expense(20.5, DateTime.now(), "Lunch", ExpenseType.food),
     Expense(
-      12.0,
-      DateTime.now().subtract(Duration(days: 1)),
-      "Breakfast",
-      ExpenseType.food,
-    ),
-    Expense(
-      35.75,
-      DateTime.now().subtract(Duration(days: 2)),
-      "Dinner with friends",
-      ExpenseType.food,
+      amount: 20.5,
+      date: DateTime.now(),
+      title: "Lunch",
+      category: ExpenseType.food,
     ),
 
     Expense(
-      150.0,
-      DateTime.now().subtract(Duration(days: 3)),
-      "Flight ticket",
-      ExpenseType.travel,
-    ),
-    Expense(
-      8.25,
-      DateTime.now().subtract(Duration(days: 4)),
-      "Bus fare",
-      ExpenseType.travel,
-    ),
-    Expense(
-      60.0,
-      DateTime.now().subtract(Duration(days: 5)),
-      "Taxi to airport",
-      ExpenseType.travel,
+      amount: 12.0,
+      date: DateTime.now().subtract(Duration(days: 1)),
+      title: "Breakfast",
+      category: ExpenseType.food,
     ),
 
     Expense(
-      25.0,
-      DateTime.now().subtract(Duration(days: 6)),
-      "Movie night",
-      ExpenseType.leisure,
-    ),
-    Expense(
-      9.5,
-      DateTime.now().subtract(Duration(days: 7)),
-      "Ice cream at park",
-      ExpenseType.leisure,
-    ),
-    Expense(
-      45.0,
-      DateTime.now().subtract(Duration(days: 8)),
-      "Theme park tickets",
-      ExpenseType.leisure,
+      amount: 35.75,
+      date: DateTime.now().subtract(Duration(days: 2)),
+      title: "Dinner with friends",
+      category: ExpenseType.food,
     ),
 
     Expense(
-      120.0,
-      DateTime.now().subtract(Duration(days: 9)),
-      "Office supplies",
-      ExpenseType.work,
+      amount: 150.0,
+      date: DateTime.now().subtract(Duration(days: 3)),
+      title: "Flight ticket",
+      category: ExpenseType.travel,
     ),
-    Expense(
-      15.0,
-      DateTime.now().subtract(Duration(days: 10)),
-      "Morning coffee at work",
-      ExpenseType.work,
-    ),
-    Expense(
-      75.0,
-      DateTime.now().subtract(Duration(days: 11)),
-      "Work lunch with team",
-      ExpenseType.work,
-    ),
-    Expense(
-      18.0,
-      DateTime.now().subtract(Duration(days: 12)),
-      "Noodles",
-      ExpenseType.food,
-    ),
-    Expense(
-      6.75,
-      DateTime.now().subtract(Duration(days: 13)),
-      "Iced Latte",
-      ExpenseType.food,
-    ),
-    Expense(
-      42.5,
-      DateTime.now().subtract(Duration(days: 14)),
-      "Family dinner",
-      ExpenseType.food,
-    ),
-    Expense(
-      3.25,
-      DateTime.now().subtract(Duration(days: 15)),
-      "Banana snack",
-      ExpenseType.food,
-    ),
-    Expense(
-      11.0,
-      DateTime.now().subtract(Duration(days: 16)),
-      "Boba tea",
-      ExpenseType.food,
-    ),
+    // Expense(
+    //   amount: 8.25,
+    //   date: DateTime.now().subtract(Duration(days: 4)),
+    //   title: "Bus fare",
+    //   category: ExpenseType.travel,
+    // ),
+    // Expense(
+    //   amount: 60.0,
+    //   date: DateTime.now().subtract(Duration(days: 5)),
+    //   title: "Taxi to airport",
+    //   category: ExpenseType.travel,
+    // ),
 
-    Expense(
-      32.0,
-      DateTime.now().subtract(Duration(days: 17)),
-      "Grab to work",
-      ExpenseType.travel,
-    ),
-    Expense(
-      98.0,
-      DateTime.now().subtract(Duration(days: 18)),
-      "Taxi long distance",
-      ExpenseType.travel,
-    ),
-    Expense(
-      12.0,
-      DateTime.now().subtract(Duration(days: 19)),
-      "Train ticket",
-      ExpenseType.travel,
-    ),
-    Expense(
-      4.0,
-      DateTime.now().subtract(Duration(days: 20)),
-      "Bike rental",
-      ExpenseType.travel,
-    ),
-    Expense(
-      175.5,
-      DateTime.now().subtract(Duration(days: 21)),
-      "Weekend trip bus ticket",
-      ExpenseType.travel,
-    ),
+    // Expense(
+    //   amount: 25.0,
+    //   date: DateTime.now().subtract(Duration(days: 6)),
+    //   title: "Movie night",
+    //   category: ExpenseType.leisure,
+    // ),
+    // Expense(
+    //   amount: 9.5,
+    //   date: DateTime.now().subtract(Duration(days: 7)),
+    //   title: "Ice cream at park",
+    //   category: ExpenseType.leisure,
+    // ),
+    // Expense(
+    //   amount: 45.0,
+    //   date: DateTime.now().subtract(Duration(days: 8)),
+    //   title: "Theme park tickets",
+    //   category: ExpenseType.leisure,
+    // ),
 
-    Expense(
-      13.5,
-      DateTime.now().subtract(Duration(days: 22)),
-      "Popcorn & Coke",
-      ExpenseType.leisure,
-    ),
-    Expense(
-      27.0,
-      DateTime.now().subtract(Duration(days: 23)),
-      "Bowling game",
-      ExpenseType.leisure,
-    ),
-    Expense(
-      55.0,
-      DateTime.now().subtract(Duration(days: 24)),
-      "Concert ticket",
-      ExpenseType.leisure,
-    ),
-    Expense(
-      10.0,
-      DateTime.now().subtract(Duration(days: 25)),
-      "Netflix monthly",
-      ExpenseType.leisure,
-    ),
-    Expense(
-      39.9,
-      DateTime.now().subtract(Duration(days: 26)),
-      "Mini golf",
-      ExpenseType.leisure,
-    ),
+    // Expense(
+    //   amount: 120.0,
+    //   date: DateTime.now().subtract(Duration(days: 9)),
+    //   title: "Office supplies",
+    //   category: ExpenseType.work,
+    // ),
+    // Expense(
+    //   amount: 15.0,
+    //   date: DateTime.now().subtract(Duration(days: 10)),
+    //   title: "Morning coffee at work",
+    //   category: ExpenseType.work,
+    // ),
+    // Expense(
+    //   amount: 75.0,
+    //   date: DateTime.now().subtract(Duration(days: 11)),
+    //   title: "Work lunch with team",
+    //   category: ExpenseType.work,
+    // ),
 
-    Expense(
-      210.0,
-      DateTime.now().subtract(Duration(days: 27)),
-      "Office chair",
-      ExpenseType.work,
-    ),
-    Expense(
-      12.0,
-      DateTime.now().subtract(Duration(days: 28)),
-      "Print docs",
-      ExpenseType.work,
-    ),
-    Expense(
-      38.25,
-      DateTime.now().subtract(Duration(days: 29)),
-      "Stationery refill",
-      ExpenseType.work,
-    ),
-    Expense(
-      14.0,
-      DateTime.now().subtract(Duration(days: 30)),
-      "Workplace coffee",
-      ExpenseType.work,
-    ),
-    Expense(
-      350.0,
-      DateTime.now().subtract(Duration(days: 31)),
-      "New monitor",
-      ExpenseType.work,
-    ),
+    // Expense(
+    //   amount: 18.0,
+    //   date: DateTime.now().subtract(Duration(days: 12)),
+    //   title: "Noodles",
+    //   category: ExpenseType.food,
+    // ),
+    // Expense(
+    //   amount: 6.75,
+    //   date: DateTime.now().subtract(Duration(days: 13)),
+    //   title: "Iced Latte",
+    //   category: ExpenseType.food,
+    // ),
+    // Expense(
+    //   amount: 42.5,
+    //   date: DateTime.now().subtract(Duration(days: 14)),
+    //   title: "Family dinner",
+    //   category: ExpenseType.food,
+    // ),
+    // Expense(
+    //   amount: 3.25,
+    //   date: DateTime.now().subtract(Duration(days: 15)),
+    //   title: "Banana snack",
+    //   category: ExpenseType.food,
+    // ),
+    // Expense(
+    //   amount: 11.0,
+    //   date: DateTime.now().subtract(Duration(days: 16)),
+    //   title: "Boba tea",
+    //   category: ExpenseType.food,
+    // ),
+
+    // Expense(
+    //   amount: 32.0,
+    //   date: DateTime.now().subtract(Duration(days: 17)),
+    //   title: "Grab to work",
+    //   category: ExpenseType.travel,
+    // ),
+    // Expense(
+    //   amount: 98.0,
+    //   date: DateTime.now().subtract(Duration(days: 18)),
+    //   title: "Taxi long distance",
+    //   category: ExpenseType.travel,
+    // ),
+    // Expense(
+    //   amount: 12.0,
+    //   date: DateTime.now().subtract(Duration(days: 19)),
+    //   title: "Train ticket",
+    //   category: ExpenseType.travel,
+    // ),
+    // Expense(
+    //   amount: 4.0,
+    //   date: DateTime.now().subtract(Duration(days: 20)),
+    //   title: "Bike rental",
+    //   category: ExpenseType.travel,
+    // ),
+    // Expense(
+    //   amount: 175.5,
+    //   date: DateTime.now().subtract(Duration(days: 21)),
+    //   title: "Weekend trip bus ticket",
+    //   category: ExpenseType.travel,
+    // ),
+
+    // Expense(
+    //   amount: 13.5,
+    //   date: DateTime.now().subtract(Duration(days: 22)),
+    //   title: "Popcorn & Coke",
+    //   category: ExpenseType.leisure,
+    // ),
+    // Expense(
+    //   amount: 27.0,
+    //   date: DateTime.now().subtract(Duration(days: 23)),
+    //   title: "Bowling game",
+    //   category: ExpenseType.leisure,
+    // ),
+    // Expense(
+    //   amount: 55.0,
+    //   date: DateTime.now().subtract(Duration(days: 24)),
+    //   title: "Concert ticket",
+    //   category: ExpenseType.leisure,
+    // ),
+    // Expense(
+    //   amount: 10.0,
+    //   date: DateTime.now().subtract(Duration(days: 25)),
+    //   title: "Netflix monthly",
+    //   category: ExpenseType.leisure,
+    // ),
+    // Expense(
+    //   amount: 39.9,
+    //   date: DateTime.now().subtract(Duration(days: 26)),
+    //   title: "Mini golf",
+    //   category: ExpenseType.leisure,
+    // ),
+
+    // Expense(
+    //   amount: 210.0,
+    //   date: DateTime.now().subtract(Duration(days: 27)),
+    //   title: "Office chair",
+    //   category: ExpenseType.work,
+    // ),
+    // Expense(
+    //   amount: 12.0,
+    //   date: DateTime.now().subtract(Duration(days: 28)),
+    //   title: "Print docs",
+    //   category: ExpenseType.work,
+    // ),
+    // Expense(
+    //   amount: 38.25,
+    //   date: DateTime.now().subtract(Duration(days: 29)),
+    //   title: "Stationery refill",
+    //   category: ExpenseType.work,
+    // ),
+    // Expense(
+    //   amount: 14.0,
+    //   date: DateTime.now().subtract(Duration(days: 30)),
+    //   title: "Workplace coffee",
+    //   category: ExpenseType.work,
+    // ),
+    // Expense(
+    //   amount: 350.0,
+    //   date: DateTime.now().subtract(Duration(days: 31)),
+    //   title: "New monitor",
+    //   category: ExpenseType.work,
+    // ),
   ];
+
+  // Function that child will call
+  void _addExpense(Expense expense) {
+    setState(() {
+      registeredExpenses.add(expense);
+    });
+    Navigator.pop(context);
+  }
 
   void onShowModal() {
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
-        return ExpenseForm();
+        return ExpenseForm(onAddExpense: _addExpense);
       },
     );
   }
 
-  // void onCloseModal() {
-  //   Navigator.pop(context);
-  // }
+  Widget _buildItem(BuildContext context, int index) {
+    final expense = registeredExpenses[index]; // Capture it first
+
+    return Dismissible(
+      key: ValueKey(expense.id),
+      child: ExpenseCard(expense: expense),
+      onDismissed: (_) {
+        setState(() {
+          registeredExpenses.remove(expense); // Remove by object, not index
+        });
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -237,17 +263,9 @@ class _ExpensesState extends State<Expenses> {
         color: Colors.blue[200],
         child: ListView.builder(
           itemCount: registeredExpenses.length,
-          itemBuilder: (context, index) =>
-              _buildItem(context, index, registeredExpenses),
+          itemBuilder: (context, index) => _buildItem(context, index),
         ),
-        // child: Column(children: [ExpenseCard(expense: expense)]),
       ),
     );
   }
-}
-
-Widget _buildItem(BuildContext context, int index, List<Expense> expenses) {
-  // print("Build item $index");
-
-  return ExpenseCard(expense: expenses[index]);
 }

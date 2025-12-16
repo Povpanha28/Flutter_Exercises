@@ -1,52 +1,103 @@
 import 'package:flutter/material.dart';
 
-const String diceImage2 = 'assets/ex5/dice-2.png';
-const String diceImage4 = 'assets/ex5/dice-4.png';
-
-class DiceRoller extends StatefulWidget {
-  const DiceRoller({super.key});
-
-  @override
-  State<DiceRoller> createState() => _DiceRollerState(); // it means to return the __DiceRollerState();
+void main() {
+  runApp(const MyApp());
 }
 
-class _DiceRollerState extends State<DiceRoller> {
-  String activeDiceImage = diceImage2;
-
-  void rollDice() {
-    //  Display the dice 4 !
-    setState(() {
-      activeDiceImage == diceImage4
-          ? {activeDiceImage = diceImage2}
-          : {activeDiceImage = diceImage4};
-    });
-  }
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
-  Widget build(context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Image.asset(activeDiceImage, width: 200),
-        const SizedBox(height: 20),
-        TextButton(
-          onPressed: rollDice,
-          style: TextButton.styleFrom(
-            foregroundColor: Colors.white,
-            textStyle: const TextStyle(fontSize: 28),
-          ),
-          child: const Text('Roll Dice'),
+  Widget build(BuildContext context) {
+    return const MaterialApp(title: 'Navigation Demo', home: HomeScreen());
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Home Screen')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('This is the Home Screen'),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SecondScreen()),
+                );
+              },
+              child: const Text('Go to Second Screen'),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
 
-void main() => runApp(
-  const MaterialApp(
-    home: Scaffold(
-      backgroundColor: Colors.deepPurple,
-      body: Center(child: DiceRoller()),
-    ),
-  ),
-);
+class SecondScreen extends StatelessWidget {
+  const SecondScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Second Screen')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('This is the Second Screen'),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ThirdScreen()),
+                );
+              },
+              child: const Text('Go to Third Screen'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Back to Home Screen'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ThirdScreen extends StatelessWidget {
+  const ThirdScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Third Screen')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('This is the Third Screen'),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Back to Second Screen'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
