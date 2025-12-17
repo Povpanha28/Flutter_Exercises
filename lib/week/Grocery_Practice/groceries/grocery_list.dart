@@ -1,3 +1,4 @@
+import 'package:app/week/Grocery_Practice/groceries/grocery_form.dart';
 import 'package:app/week/Grocery_Practice/models/grocery.dart';
 import 'package:flutter/material.dart';
 import '../data/mock_grocery_repository.dart';
@@ -10,22 +11,18 @@ class GroceryList extends StatefulWidget {
 }
 
 class _GroceryListState extends State<GroceryList> {
-  void onCreate() {
+  Future<void> onCreate() async {
     // TODO-4 - Navigate to the form screen using the Navigator push
-  }
-
-// this widget is use to create groceryList 
-  Widget _groceryList(BuildContext context, int index) {
-    return ListTile(
-      title: Text(dummyGroceryItems[index].name),
-      leading: Container(
-        width: 15,
-        height: 15,
-        color: dummyGroceryItems[index].category.color,
-      ),
-      trailing: Text(dummyGroceryItems[index].quantity.toString()),
-      onTap: (){},
+    final grocery = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const NewItem()),
     );
+
+    if (grocery != null) {
+      setState(() {
+        dummyGroceryItems.add(grocery);
+      });
+    }
   }
 
   @override
@@ -35,15 +32,16 @@ class _GroceryListState extends State<GroceryList> {
     if (dummyGroceryItems.isNotEmpty) {
       // TODO-1 - Display groceries with an Item builder and  LIst Tile
       content = ListView.builder(
-        itemBuilder: (context, index) => _groceryList(context, index),
         itemCount: dummyGroceryItems.length,
+        itemBuilder: (context, index) =>
+            GroceryTile(grocery: dummyGroceryItems[index]),
       );
     }
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your Groceries'),
-        actions: [IconButton(onPressed: () => {}, icon: const Icon(Icons.add))],
+        actions: [IconButton(onPressed: onCreate, icon: const Icon(Icons.add))],
       ),
       body: content,
     );
@@ -57,7 +55,10 @@ class GroceryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO-2 - Display groceries with an Item builder and  LIst Tile
-    return const Text("TODO");
+    return ListTile(
+      leading: Container(color: grocery.category.color, width: 15, height: 15),
+      title: Text(grocery.name),
+      trailing: Text(grocery.quantity.toString()),
+    );
   }
 }
