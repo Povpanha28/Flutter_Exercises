@@ -224,7 +224,6 @@ class _ExpensesState extends State<Expenses> {
     setState(() {
       registeredExpenses.add(expense);
     });
-    Navigator.pop(context);
   }
 
   void onShowModal() {
@@ -238,6 +237,7 @@ class _ExpensesState extends State<Expenses> {
 
   Widget _buildItem(BuildContext context, int index) {
     final expense = registeredExpenses[index]; // Capture it first
+    final removeIndex = index;
 
     return Dismissible(
       key: ValueKey(expense.id),
@@ -246,6 +246,27 @@ class _ExpensesState extends State<Expenses> {
         setState(() {
           registeredExpenses.remove(expense); // Remove by object, not index
         });
+
+        // Offer undo after removal
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(
+              content: Text('${expense.title} deleted'),
+              action: SnackBarAction(
+                label: 'UNDO',
+                onPressed: () {
+                  setState(() {
+                    final insertIndex = removeIndex.clamp(
+                      0,
+                      registeredExpenses.length,
+                    );
+                    registeredExpenses.insert(insertIndex, expense);
+                  });
+                },
+              ),
+            ),
+          );
       },
     );
   }
@@ -261,10 +282,12 @@ class _ExpensesState extends State<Expenses> {
       body: Container(
         padding: const EdgeInsets.all(10),
         color: Colors.blue[200],
-        child: ListView.builder(
-          itemCount: registeredExpenses.length,
-          itemBuilder: (context, index) => _buildItem(context, index),
-        ),
+        child: registeredExpenses.isEmpty
+            ? const Center(child: Text("No expense added yet"))
+            : ListView.builder(
+                itemCount: registeredExpenses.length,
+                itemBuilder: (context, index) => _buildItem(context, index),
+              ),
       ),
     );
   }

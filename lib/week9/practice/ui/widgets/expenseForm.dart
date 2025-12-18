@@ -13,43 +13,55 @@ class ExpenseForm extends StatefulWidget {
 class _ExpenseFormState extends State<ExpenseForm> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
+
   ExpenseType selectedCategory = ExpenseType.food;
+  DateTime? _selectedDate;
 
   @override
   void dispose() {
-    super.dispose();
-
     _titleController.dispose();
     _amountController.dispose();
+    super.dispose();
   }
 
-void _submit() {
-  String title = _titleController.text.trim();
-  double? amount = double.tryParse(_amountController.text);
+  bool _isInputValid(String title, double? amount, DateTime? date) {
+    if (title.isEmpty) {
+      showWarningDialog("Invalid input", "The title cannot be empty.");
+      return false;
+    }
 
-  if (title.isEmpty) {
-    showWarningDialog("Invalid input", "The title cannot be empty");
-    return;
+    if (amount == null || amount <= 0) {
+      showWarningDialog(
+        "Invalid input",
+        "The amount must be greater than zero.",
+      );
+      return false;
+    }
+
+    if (date == null) {
+      showWarningDialog("Invalid input", "Please select a date.");
+      return false;
+    }
+
+    return true;
   }
 
-  if (amount == null) {
-    showWarningDialog(
-      "Invalid input",
-      "The amount can't be empty !",
+  void _submit() {
+    final title = _titleController.text.trim();
+    final amount = double.tryParse(_amountController.text);
+
+    if (!_isInputValid(title, amount, _selectedDate)) return;
+
+    final expense = Expense(
+      title: title,
+      amount: amount!,
+      date: _selectedDate!,
+      category: selectedCategory,
     );
-    return;
+
+    widget.onAddExpense(expense);
+    Navigator.pop(context);
   }
-
-  // Create expense only after validation
-  Expense expense = Expense(
-    amount: amount,
-    date: DateTime.now(),
-    title: title,
-    category: selectedCategory,
-  );
-
-  widget.onAddExpense(expense);   // send to parent
-}
 
   void showWarningDialog(String title, String message) {
     showDialog(
@@ -58,10 +70,30 @@ void _submit() {
         title: Text(title),
         content: Text(message),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: Text("Okay")),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text("Okay"),
+          ),
         ],
       ),
     );
+  }
+
+  void _presentDatePicker() async {
+    final now = DateTime.now();
+
+    final pickedDate = await showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: DateTime(now.year - 1),
+      lastDate: now,
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+    }
   }
 
   void onCancel() {
@@ -71,26 +103,28 @@ void _submit() {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextField(
             controller: _titleController,
-            decoration: InputDecoration(label: Text("Title")),
+            decoration: const InputDecoration(labelText: "Title"),
             maxLength: 50,
           ),
+
           TextField(
-            decoration: InputDecoration(label: Text("Amount")),
             controller: _amountController,
-            keyboardType: TextInputType.number, // Shows the number keyboard
+            decoration: const InputDecoration(labelText: "Amount"),
+            keyboardType: TextInputType.number,
             inputFormatters: [
               FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
             ],
           ),
-          SizedBox(height: 20),
-          DropdownButton(
-            menuWidth: 500,
+
+          const SizedBox(height: 16),
+
+          DropdownButtonFormField<ExpenseType>(
             value: selectedCategory,
             items: ExpenseType.values
                 .map(
@@ -100,17 +134,48 @@ void _submit() {
                   ),
                 )
                 .toList(),
-            onChanged: (expenseType) {
+            onChanged: (value) {
               setState(() {
-                selectedCategory = expenseType!;
+                selectedCategory = value!;
               });
             },
+            decoration: const InputDecoration(labelText: "Category"),
           ),
+
+          const SizedBox(height: 20),
+
           Row(
             children: [
-              ElevatedButton(onPressed: onCancel, child: Text("Cancel")),
-              SizedBox(width: 10),
-              ElevatedButton(onPressed: () => _submit(), child: Text("Create")),
+              Expanded(
+                child: Text(
+                  _selectedDate == null
+                      ? "No date selected"
+                      : "${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}",
+                  style: TextStyle(
+                    color: _selectedDate == null
+                        ? Colors.grey
+                        : Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.calendar_month),
+                onPressed: _presentDatePicker,
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 24),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(onPressed: onCancel, child: const Text("Cancel")),
+              const SizedBox(width: 12),
+              ElevatedButton(
+                onPressed: _submit,
+                child: const Text("Save"),
+              ),
             ],
           ),
         ],
