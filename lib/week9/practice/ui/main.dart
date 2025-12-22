@@ -257,11 +257,11 @@ class _ExpensesState extends State<Expenses> {
                 label: 'UNDO',
                 onPressed: () {
                   setState(() {
-                    final insertIndex = removeIndex.clamp(
-                      0,
-                      registeredExpenses.length,
-                    );
-                    registeredExpenses.insert(insertIndex, expense);
+                    // final insertIndex = removeIndex.clamp(
+                    //   0,
+                    //   registeredExpenses.length,
+                    // );
+                    registeredExpenses.insert(removeIndex, expense);
                   });
                 },
               ),
