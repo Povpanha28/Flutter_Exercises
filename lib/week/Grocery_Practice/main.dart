@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'groceries/grocery_list.dart';
+import 'ui/groceries/grocery_list.dart';
 
 
 void main() {

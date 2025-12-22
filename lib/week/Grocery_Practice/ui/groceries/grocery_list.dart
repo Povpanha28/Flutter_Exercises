@@ -1,7 +1,7 @@
-import 'package:app/week/Grocery_Practice/groceries/grocery_form.dart';
+import 'package:app/week/Grocery_Practice/ui/groceries/grocery_form.dart';
 import 'package:app/week/Grocery_Practice/models/grocery.dart';
 import 'package:flutter/material.dart';
-import '../data/mock_grocery_repository.dart';
+import '../../data/mock_grocery_repository.dart';
 
 class GroceryList extends StatefulWidget {
   const GroceryList({super.key});
