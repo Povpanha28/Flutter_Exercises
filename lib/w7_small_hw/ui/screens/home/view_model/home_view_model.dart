@@ -1,15 +1,16 @@
-import 'package:flutter/foundation.dart';
-import '../../../../data/repositories/songs/song_repository.dart';
-import '../../../../model/songs/song.dart';
-import '../../../states/player_state.dart';
+import 'package:app/w7_small_hw/data/repositories/songs/song_repository.dart';
+import 'package:app/w7_small_hw/model/songs/song.dart';
+import 'package:app/w7_small_hw/ui/states/player_state.dart';
+import 'package:flutter/widgets.dart';
 
-class LibraryViewModel extends ChangeNotifier {
+class HomeViewModel extends ChangeNotifier {
   final SongRepository _songRepository;
   final PlayerState _playerState;
 
   List<Song> _songs = [];
+  List<Song> _recentSong = [];
 
-  LibraryViewModel({
+  HomeViewModel({
     required SongRepository songRepository,
     required PlayerState playerState,
   }) : _songRepository = songRepository,
@@ -19,6 +20,7 @@ class LibraryViewModel extends ChangeNotifier {
 
   // Getters for UI
   List<Song> get songs => _songs;
+  List<Song> get recentSongs => _recentSong;
   Song? get currentSong => _playerState.currentSong;
   bool get isPlaying => false;
 
@@ -28,14 +30,17 @@ class LibraryViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Listen to PlayerState changes
-  void _onPlayerStateChanged() {
+  // add recent song
+  void addRecentSong(Song song) {
+    _recentSong.removeWhere((s) => s.id == song.id); // Remove if exists
+    _recentSong.insert(0, song); // Add to beginning
     notifyListeners();
   }
 
   // User actions
   void play(Song song) {
     _playerState.start(song);
+    addRecentSong(song); // Add when playing
   }
 
   void stop() {
@@ -52,6 +57,11 @@ class LibraryViewModel extends ChangeNotifier {
 
   bool isSongPlaying(Song song) {
     return currentSong == song;
+  }
+
+  // Listen to PlayerState changes
+  void _onPlayerStateChanged() {
+    notifyListeners();
   }
 
   @override

@@ -9,14 +9,9 @@ class LibraryContent extends StatelessWidget {
   const LibraryContent({super.key});
 
   @override
-@override
   Widget build(BuildContext context) {
     final viewModel = context.watch<LibraryViewModel>();
     final settingsState = context.watch<AppSettingsState>();
-
-    if (viewModel.isLoading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
-    }
 
     return Scaffold(
       body: Container(
